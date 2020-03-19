@@ -1,4 +1,4 @@
-# red_refresh
+# Red Refresh
 A firefox plugin that refreshes tabs and keeps track of how long they were open for Red Team Operations
 
 ## TODO
