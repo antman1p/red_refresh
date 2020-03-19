@@ -2,7 +2,7 @@
 A firefox plugin that refreshes tabs and keeps track of how long they were open for Red Team Operations
 
 ## TODO
-* On load, query all of the open browser tabs, return their page titles
+* ~On load, query all of the open browser tabs, return their page titles~
   * add them to the table
 * When a row is clicked, if active, enable "deactivate" button
   * When inactive, enable the "activate" button
