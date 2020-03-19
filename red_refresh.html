@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="container">
+        <form>
+          <fieldset>
+            <legend>Red Refresh</legend>
+
+            <div class="form-group">
+              <label for="inputInterval">Refresh Interval:</label>
+              <input type="number" class="form-control" id="inputInterval" aria-describedby="intervalHelp" placeholder="60">
+              <small id="intervalHelp" class="form-text text-muted">Input refresh interval desired in seconds.</small>
+            </div>
+
+            <div class="form-group">
+              <div class="container">
+                <button type="button" class="btn btn-success">Start</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+        <fieldset>
+            <div class="container">
+              <label for="activeTimersTable">Active Refreshes:</label>
+              <table class="table table-hover" id="activeTimersTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Tab</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">Time Elapsed</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="table-default">
+                    <th scope="row">Okta</th>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="container">
+                <button type="button" class="btn btn-danger disabled">Stop</button>
+              </div>
+            </div>
+        </fieldset>
+
+    <script src="js/jquery-3.4.1.slim.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="red_refresh.js"></script>
+    <script src="js/table-select.js"></script>
+  </body>
+
+</html>

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Red Refresh",
+  "version": "1.0",
+
+  "description": "Auto-refresh your browser tabs for redteam operations",
+
+  "icons": {
+    "48": "icons/red_refresh.png",
+    "96": "icons/red_refresh.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_title": "Red Refresh",
+    "default_popup": "red_refresh.html",
+    "default_icon": "icons/red_refresh.png",
+    "browser_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["red_refresh.js"]
+    }
+  ]
+}
