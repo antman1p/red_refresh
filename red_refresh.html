@@ -14,8 +14,8 @@
             <legend>Red Refresh</legend>
             <div class="container">
               <label for="activeTimersTable">Active Refreshes:</label>
-              <table class="table table-hover" id="activeTimersTable">
-                <thead>
+              <table class="table table-hover table-bordered" id="activeTimersTable">
+                <thead class = "thead-dark">
                   <tr>
                     <th scope="col">Status</th>
                     <th scope="col">Tab</th>
@@ -26,6 +26,7 @@
                   <tbody>
                   </tbody>
               </table>
+            </div>
 
               <div class="form-group">
                 <label for="inputInterval">Refresh Interval:</label>
@@ -43,12 +44,13 @@
           </fieldset>
         </form>
       </div>
+    </div>
 
 
     <script src="js/jquery-3.4.1.slim.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="red_refresh.js"></script>
-    <script src="js/table-select.js"></script>
+    <!--<script src="js/table-select.js"></script>-->
   </body>
 
 </html>

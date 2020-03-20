@@ -18,12 +18,14 @@ function listTabs() {
 
       cell1.innerHTML = "Inactive";
       cell2.innerHTML = tab.title;
-      cell3.innerHTML = " - "
-      cell4.innerHTML = " - "
-
-
-      //debug
-      //console.log(tab.title);
+      cell3.innerHTML = " - ";
+      cell4.innerHTML = " - ";
     }
   });
 }
+
+$('#activeTimersTable tbody tr').click(function(){
+  console.log("I'm inside above func!");
+  $(this).addClass('table-info').siblings().removeClass('table-info');
+  console.log("I'm inside below inner func!");
+});
