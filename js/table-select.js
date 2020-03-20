@@ -1,4 +1,4 @@
 
 $('#activeTimersTable tbody tr').click(function(){
-  $(this).addClass('bg-success').siblings().removeClass('bg-success');
+  $(this).addClass('table-info').siblings().removeClass('table-info');
 });
