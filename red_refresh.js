@@ -23,9 +23,3 @@ function listTabs() {
     }
   });
 }
-
-$('#activeTimersTable tbody tr').click(function(){
-  console.log("I'm inside above func!");
-  $(this).addClass('table-info').siblings().removeClass('table-info');
-  console.log("I'm inside below inner func!");
-});
