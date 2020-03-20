@@ -3,7 +3,8 @@ A firefox plugin that refreshes tabs and keeps track of how long they were open 
 
 ## TODO
 * ~On load, query all of the open browser tabs, return their page titles~
-  * add them to the table
+  * ~add them to the table~
+* Fix selecting/highlighting row onclick (It broke after dynamically populating the table)
 * When a row is clicked, if active, enable "deactivate" button
   * When inactive, enable the "activate" button
 * When "deactivate" button is clicked, stop the refresh timer coresponding to the selected table item
