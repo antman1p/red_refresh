@@ -29,11 +29,15 @@ function tableSelect() {
   $('#activeTimersTable tbody tr').click(function(){
     $(this).addClass('table-info').siblings().removeClass('table-info');
     enableActivateButton();
+    enableIntevalTB();
   });
-
 }
 
 function enableActivateButton() {
   var actBtn = document.getElementById("actBtn");
   actBtn.className = "btn btn-success";
+}
+
+function enableIntevalTB() {
+  document.getElementById("inputInterval").disabled = false;
 }
