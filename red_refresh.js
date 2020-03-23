@@ -21,14 +21,19 @@ function listTabs() {
       cell3.innerHTML = " - ";
       cell4.innerHTML = " - ";
     }
-    tableSelect()
+    tableSelect();
   });
 }
 
 function tableSelect() {
   $('#activeTimersTable tbody tr').click(function(){
-    console.log("I'm above!");
     $(this).addClass('table-info').siblings().removeClass('table-info');
-    console.log("I'm below!");
+    enableActivateButton();
   });
+
+}
+
+function enableActivateButton() {
+  var actBtn = document.getElementById("actBtn");
+  actBtn.className = "btn btn-success";
 }
