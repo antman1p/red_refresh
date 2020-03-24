@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", listTabs);
 
+// Get the tabs that are open in the current window
 function getCurrentWindowTabs() {
   return browser.tabs.query({currentWindow: true});
 }
 
+// Dynamically populate the table body with the open window tabs
 function listTabs() {
   var currentTabs = getCurrentWindowTabs().then((tabs) => {
     var tableBod = document.getElementById("activeTimersTable").getElementsByTagName('tbody')[0];
@@ -27,6 +29,7 @@ function listTabs() {
   });
 }
 
+// start the click fucntion for selecting table rows.
 function tableSelect() {
   $('#activeTimersTable tbody tr').click(function(){
     $(this).removeClass("table-default").siblings().addClass("table-default");
@@ -36,27 +39,69 @@ function tableSelect() {
   });
 }
 
+// Enable the activae button
 function enableActivateButton() {
   var actBtn = document.getElementById("actBtn");
   actBtn.className = "btn btn-success";
 }
 
+// Disable the activate button
+function disableActivateButton() {
+  var actBtn = document.getElementById("actBtn");
+  actBtn.className = "btn btn-success disabled";
+}
+
+function enableDeactivateButton() {
+  var deActBtn = document.getElementById("deactBtn");
+  deActBtn.className = "btn btn-danger";
+}
+
+function disableDeactivateButton() {
+  var deActBtn = document.getElementById("deactBtn");
+  deActBtn.className = "btn btn-danger disabled";
+}
+
+// Enable the refresh interval textbox
 function enableIntevalTB() {
   document.getElementById("inputInterval").disabled = false;
 }
 
-function activateRefreshTimer() {
-  var rows = document.getElementById("activeTimersTable").getElementsByTagName('tr');
-  console.log(rows);
-  for (row in rows){
-
-  }
+// Disable the refresh interval tesxtbox
+function disableIntevalTB() {
+  document.getElementById("inputInterval").disabled = true;
 }
 
+//  start a timer for the tab corresponding to the slected row
+function activateRefreshTimer() {
+  var refreshTable = document.getElementById("activeTimersTable");
+  // get the selected row
+  var selectedRow = refreshTable.getElementsByClassName("table-info");
+  // gets the value of the data in the id column from the slected row
+  var rowIdValue = selectedRow[0].children[4].textContent;
+  console.log(rowIdValue);
+  setCellTimer(selectedRow);
+  selectedRow[0].className = "table-success";
+  enableDeactivateButton()
+
+}
+
+// Click function for the "activate" button
   $('#actBtn').click(function(){
-    var actvTmrsTbl = document.getElementById("activeTimersTable");
+    disableActivateButton();
+    disableIntevalTB()
     activateRefreshTimer();
   });
 
+// starts the timer
 function startNewTimer() {
+  var delta = Date.now() - start;
+}
+
+function setCellTimer(rowData) {
+  var start = new Date();
+  var dateString = start.getMonth()+1 +"/"
+  + (start.getDate()) +"/"+ start.getFullYear() + " "
+  + start.getHours() + ":" + start.getMinutes() + ":"
+  + start.getSeconds();
+  rowData[0].cells[2].innerHTML = dateString;
 }
