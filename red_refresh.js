@@ -79,7 +79,7 @@ function activateRefreshTimer() {
   // gets the value of the data in the id column from the slected row
   var rowIdValue = selectedRow[0].children[4].textContent;
   console.log(rowIdValue);
-  setCellTimer(selectedRow);
+  setCellStartTime(selectedRow);
   selectedRow[0].className = "table-success";
   enableDeactivateButton()
 
@@ -97,11 +97,30 @@ function startNewTimer() {
   var delta = Date.now() - start;
 }
 
-function setCellTimer(rowData) {
+function setCellStartTime(rowData) {
   var start = new Date();
+  var rowDt = rowData;
+
+// Build date string for start date/time
   var dateString = start.getMonth()+1 +"/"
   + (start.getDate()) +"/"+ start.getFullYear() + " "
   + start.getHours() + ":" + start.getMinutes() + ":"
   + start.getSeconds();
-  rowData[0].cells[2].innerHTML = dateString;
+
+  // add start date to the cell
+  rowDt[0].cells[2].innerHTML = dateString;
+
+  //call Timer starts
+  showTimer(start, rowDt);
+}
+
+function showTimer(startTime, rowData) {
+  var rwDt = rowData;
+  var time = startTime;
+  var h = time.getHours();
+  var m = time.getMinutes();
+  var s = time.getSeconds();
+  var elapsedTimeString = h + ":" + m + ":" + s;
+  rwDt[0].cells[3].innerHTML = elapsedTimeString;
+  setTimeout(showTimer, 1000, time, rwDt);
 }
