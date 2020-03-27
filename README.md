@@ -8,5 +8,5 @@ A firefox plugin that refreshes tabs and keeps track of how long they were open 
 * ~When inactive, enable the "activate" button~
   * When a row is clicked, if active, enable "deactivate" button
 * When "activate" button is clicked, start the refresh the browser tab coresponding selected row item 
-  * Set it as Active on the table
+  * ~Set it as Active on the table~
 * When "deactivate" button is clicked, stop the refresh timer coresponding to the selected table item
