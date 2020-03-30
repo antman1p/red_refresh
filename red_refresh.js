@@ -18,9 +18,10 @@ function listTabs() {
       var cell2 = row.insertCell(2);
       var cell3 = row.insertCell(3);
       var cell4 = row.insertCell(4);
-
+      var tabUrlStr = tab.url;
+      if(tabUrlStr.length > 25) tabUrlStr = tabUrlStr.substring(0,25);
       cell0.innerHTML = "Inactive";
-      cell1.innerHTML = tab.title;
+      cell1.innerHTML = tabUrlStr;
       cell2.innerHTML = " - ";
       cell3.innerHTML = " - ";
       cell4.innerHTML = tab.id;
@@ -78,10 +79,10 @@ function activateRefreshTimer() {
   var selectedRow = refreshTable.getElementsByClassName("table-info");
   // gets the value of the data in the id column from the slected row
   var rowIdValue = selectedRow[0].children[4].textContent;
-  console.log(rowIdValue);
+  var classStr = "selectedRow_" + rowIdValue;
+
+  $(selectedRow).addClass(classStr);
   setCellStartTime(selectedRow);
-  selectedRow[0].className = "table-success";
-  enableDeactivateButton()
 
 }
 
@@ -99,7 +100,8 @@ function startNewTimer() {
 
 function setCellStartTime(rowData) {
   var start = new Date();
-  var rowDt = rowData;
+  $(rowData).addClass("table-success");
+  enableDeactivateButton();
 
 // Build date string for start date/time
   var dateString = start.getMonth()+1 +"/"
@@ -108,19 +110,39 @@ function setCellStartTime(rowData) {
   + start.getSeconds();
 
   // add start date to the cell
-  rowDt[0].cells[2].innerHTML = dateString;
+  rowData[0].cells[2].innerHTML = dateString;
+
+  // gets the value of the data in the id column from the slected row
+  var rowIdValue = rowData[0].children[4].textContent;
 
   //call Timer starts
-  showTimer(start, rowDt);
+  showTimer(start, rowIdValue);
 }
 
-function showTimer(startTime, rowData) {
-  var rwDt = rowData;
-  var time = startTime;
-  var h = time.getHours();
-  var m = time.getMinutes();
-  var s = time.getSeconds();
-  var elapsedTimeString = h + ":" + m + ":" + s;
-  rwDt[0].cells[3].innerHTML = elapsedTimeString;
-  setTimeout(showTimer, 1000, time, rwDt);
+function showTimer(startTime, rowId) {
+  var refreshTable = document.getElementById("activeTimersTable");
+  var rowClassStr =  "selectedRow_" + rowId;
+  // get the selected row
+  for (i=0; i < refreshTable.rows.length; i++) {
+    if ($(refreshTable.rows.item(i)).hasClass(rowClassStr)) {
+      var selectedRow = $(refreshTable.rows.item(i));
+      $(selectedRow).removeClass("table-info");
+    }
+  }
+  var sTime = startTime;
+  var currTime = new Date();
+
+  var timeDiff = currTime - sTime;
+  timeDiff /= 1000;
+  var seconds = Math.round(timeDiff);
+
+  // var h = time.getHours();
+  // var m = time.getMinutes();
+  // var s = time.getSeconds();
+  // var elapsedTimeString = h + ":" + m + ":" + s;
+  selectedRow[0].cells[3].innerHTML = timeDiff;
+
+
+
+  setTimeout(showTimer, 1000, sTime, rowId);
 }
