@@ -115,13 +115,22 @@ function setCellStartTime(rowData) {
   // gets the value of the data in the id column from the slected row
   var rowIdValue = rowData[0].children[4].textContent;
 
+  // get the input for refresh frequency
+  var freq = document.getElementById("inputInterval").value;
+
+  // start the tab refresh
+  refreshTab(rowIdValue, freq)
+
   //call Timer starts
-  showTimer(start, rowIdValue);
+  showTimer(start, rowIdValue, freq);
 }
 
 function showTimer(startTime, rowId) {
   var refreshTable = document.getElementById("activeTimersTable");
+
+  // string for the classname for the row corresponding to the rowID parameter
   var rowClassStr =  "selectedRow_" + rowId;
+
   // get the selected row
   for (i=0; i < refreshTable.rows.length; i++) {
     if ($(refreshTable.rows.item(i)).hasClass(rowClassStr)) {
@@ -129,6 +138,7 @@ function showTimer(startTime, rowId) {
       $(selectedRow).removeClass("table-info");
     }
   }
+
   var sTime = startTime;
   var currTime = new Date();
 
@@ -136,9 +146,17 @@ function showTimer(startTime, rowId) {
   timeDiff /= 1000;
   var seconds = Math.round(timeDiff);
 
-  selectedRow[0].cells[3].innerHTML = timeDiff;
+  selectedRow[0].cells[3].innerHTML = seconds;
 
-
-
+  // recursive call to keep refresshing the timer display
   setTimeout(showTimer, 1000, sTime, rowId);
+
+}
+
+function refreshTab(rowId, freq){
+  var frequency = freq * 1000;
+
+  var idInt = parseInt(rowId);
+  browser.tabs.reload(idInt);
+  setTimeout(refreshTab, frequency, rowId, freq);
 }
