@@ -136,10 +136,6 @@ function showTimer(startTime, rowId) {
   timeDiff /= 1000;
   var seconds = Math.round(timeDiff);
 
-  // var h = time.getHours();
-  // var m = time.getMinutes();
-  // var s = time.getSeconds();
-  // var elapsedTimeString = h + ":" + m + ":" + s;
   selectedRow[0].cells[3].innerHTML = timeDiff;
 
 

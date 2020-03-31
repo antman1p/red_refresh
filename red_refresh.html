@@ -7,17 +7,15 @@
   </head>
 
   <body>
-    <div class="container">
-      <div class="container">
+    <div>
         <form>
           <fieldset class="form-group">
-            <legend>Red Refresh</legend>
-            <div class="container">
+            <legend style="padding-top:1000;">Red Refresh</legend>
               <label for="activeTimersTable">Active Refreshes:</label>
               <table
               data-click-to-select="true"
               data-single-select="true"
-              class="table table-hover table-bordered"
+              class="table table-hover table-bordered table-responsive"
               id="activeTimersTable">
                 <thead class = "thead-dark">
                   <th scope="col">Status</th>
@@ -29,7 +27,6 @@
                 <tbody>
                 </tbody>
               </table>
-            </div>
           </fieldset>
           <fieldset>
               <div class="form-group">
@@ -47,7 +44,6 @@
           </fieldset>
         </form>
       </div>
-    </div>
     <script src="js/jquery-3.4.1.slim.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="red_refresh.js"></script>
