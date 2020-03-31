@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", listTabs);
-
+var deactivationList = [];
 // Get the tabs that are open in the current window
 function getCurrentWindowTabs() {
   return browser.tabs.query({currentWindow: true});
@@ -36,7 +36,7 @@ function tableSelect() {
     $(this).removeClass("table-default").siblings().addClass("table-default");
     $(this).addClass('table-info').siblings().removeClass('table-info');
     enableActivateButton();
-    enableIntevalTB();
+    enableIntervalTB();
   });
 }
 
@@ -63,12 +63,12 @@ function disableDeactivateButton() {
 }
 
 // Enable the refresh interval textbox
-function enableIntevalTB() {
+function enableIntervalTB() {
   document.getElementById("inputInterval").disabled = false;
 }
 
 // Disable the refresh interval tesxtbox
-function disableIntevalTB() {
+function disableIntervalTB() {
   document.getElementById("inputInterval").disabled = true;
 }
 
@@ -89,7 +89,7 @@ function activateRefreshTimer() {
 // Click function for the "activate" button
   $('#actBtn').click(function(){
     disableActivateButton();
-    disableIntevalTB()
+    disableIntervalTB()
     activateRefreshTimer();
   });
 
@@ -101,6 +101,7 @@ function startNewTimer() {
 function setCellStartTime(rowData) {
   var start = new Date();
   $(rowData).addClass("table-success");
+
   enableDeactivateButton();
 
 // Build date string for start date/time
@@ -117,6 +118,8 @@ function setCellStartTime(rowData) {
 
   // get the input for refresh frequency
   var freq = document.getElementById("inputInterval").value;
+
+  $(rowData).removeClass("table-info");
 
   // start the tab refresh
   refreshTab(rowIdValue, freq)
@@ -135,10 +138,8 @@ function showTimer(startTime, rowId) {
   for (i=0; i < refreshTable.rows.length; i++) {
     if ($(refreshTable.rows.item(i)).hasClass(rowClassStr)) {
       var selectedRow = $(refreshTable.rows.item(i));
-      $(selectedRow).removeClass("table-info");
     }
   }
-
   var sTime = startTime;
   var currTime = new Date();
 
@@ -148,9 +149,17 @@ function showTimer(startTime, rowId) {
 
   selectedRow[0].cells[3].innerHTML = seconds;
 
+  var onList = false;
   // recursive call to keep refresshing the timer display
-  setTimeout(showTimer, 1000, sTime, rowId);
-
+  for (i=0; i < deactivationList.length; i++){
+    if (deactivationList[i] == rowClassStr) {
+      onList = true;
+    }
+  }
+  if (!onList) {
+    setTimeout(showTimer, 1000, sTime, rowId);
+  }
+  else {return;}
 }
 
 function refreshTab(rowId, freq){
@@ -158,5 +167,44 @@ function refreshTab(rowId, freq){
 
   var idInt = parseInt(rowId);
   browser.tabs.reload(idInt);
-  setTimeout(refreshTab, frequency, rowId, freq);
+  var classStr = "selectedRow_" + rowId;
+  var onList = false;
+  // recursive call to keep refresshing the timer display
+  for (i=0; i < deactivationList.length; i++){
+    if (deactivationList[i] == rowClassStr) {
+      onList = true;
+    }
+  }
+  if (!onList) {
+    setTimeout(refreshTab, frequency, rowId, freq);
+  }
+  else {
+    for (i=0; i < deactivationList.length; i++){
+      if (deactivationList[i] == classStr) {
+        deactivationList.splice(i, 1);
+      }
+    return;
+    }
+  }
 }
+
+// Click function for the "activate" button
+  $('#deactBtn').click(function(){
+    disableActivateButton();
+    disableIntervalTB();
+    deactivateRefreshTimer();
+  });
+
+  function deactivateRefreshTimer() {
+    var refreshTable = document.getElementById("activeTimersTable");
+    // get the selected row
+    var selectedRow = refreshTable.getElementsByClassName("table-info");
+    // gets the value of the data in the id column from the slected row
+    var rowIdValue = selectedRow[0].children[4].textContent;
+    var classStr = "selectedRow_" + rowIdValue;
+
+    deactivationList.push(classStr);
+
+    $(selectedRow).addClass("table-danger");
+    $(selectedRow).removeClass("table-info");
+  }
