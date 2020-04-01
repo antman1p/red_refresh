@@ -171,7 +171,7 @@ function refreshTab(rowId, freq){
   var onList = false;
   // recursive call to keep refresshing the timer display
   for (i=0; i < deactivationList.length; i++){
-    if (deactivationList[i] == rowClassStr) {
+    if (deactivationList[i] == classStr) {
       onList = true;
     }
   }
@@ -183,8 +183,8 @@ function refreshTab(rowId, freq){
       if (deactivationList[i] == classStr) {
         deactivationList.splice(i, 1);
       }
-    return;
     }
+    return;
   }
 }
 
