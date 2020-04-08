@@ -1,0 +1,21 @@
+{
+  "name": "red_refresh",
+  "version": "1.0.0",
+  "description": "A firefox plugin that refreshes tabs and keeps track of how long they were open for Red Team Operations",
+  "main": "red_refresh.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint red_refresh.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git-it.ad.whirl.net:security/red_refresh.git"
+  },
+  "author": "apiazza",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-mozilla": "^2.4.0",
+    "eslint-plugin-react": "^7.19.0"
+  }
+}

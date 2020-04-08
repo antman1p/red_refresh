@@ -7,7 +7,7 @@ function getCurrentWindowTabs() {
 
 // Dynamically populate the table body with the open window tabs
 function listTabs() {
-  var currentTabs = getCurrentWindowTabs().then((tabs) => {
+  getCurrentWindowTabs().then((tabs) => {
     var tableBod = document.getElementById("activeTimersTable").getElementsByTagName('tbody')[0];
     for (let tab of tabs) {
       var row = tableBod.insertRow();
@@ -93,11 +93,6 @@ function activateRefreshTimer() {
     activateRefreshTimer();
   });
 
-// starts the timer
-function startNewTimer() {
-  var delta = Date.now() - start;
-}
-
 function setCellStartTime(rowData) {
   var start = new Date();
   $(rowData).addClass("table-success");
@@ -135,7 +130,7 @@ function showTimer(startTime, rowId) {
   var rowClassStr =  "selectedRow_" + rowId;
 
   // get the selected row
-  for (i=0; i < refreshTable.rows.length; i++) {
+  for (var i=0; i < refreshTable.rows.length; i++) {
     if ($(refreshTable.rows.item(i)).hasClass(rowClassStr)) {
       var selectedRow = $(refreshTable.rows.item(i));
     }
@@ -170,7 +165,7 @@ function refreshTab(rowId, freq){
   var classStr = "selectedRow_" + rowId;
   var onList = false;
   // recursive call to keep refresshing the timer display
-  for (i=0; i < deactivationList.length; i++){
+  for (var i=0; i < deactivationList.length; i++){
     if (deactivationList[i] == classStr) {
       onList = true;
     }
