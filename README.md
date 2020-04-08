@@ -13,4 +13,5 @@ Let's say you have access to a victim's email account and you are wrapping up op
 * ~When "activate" button is clicked, start the refresh the browser tab coresponding selected row item~
   * ~Set it as Active on the table~
 * ~When "deactivate" button is clicked, stop the refresh timer coresponding to the selected table item~
-* Test
+* ~Test~
+* Utilize disableActivateButton() function
