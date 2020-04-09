@@ -4,7 +4,10 @@
   "version": "1.0",
 
   "description": "Auto-refresh your browser tabs for redteam operations",
-
+  "background": {
+    "page": "red_refresh.html",
+    "persistence": true
+   },
   "icons": {
     "48": "icons/red_refresh.png",
     "96": "icons/red_refresh.png"
@@ -12,6 +15,8 @@
   "permissions": [
     "<all_urls>",
     "activeTab",
+    "storage",
+    "cookies",
     "tabs"
   ],
   "browser_action": {
@@ -20,10 +25,10 @@
     "default_icon": "icons/red_refresh.png",
     "browser_style": true
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["red_refresh.js"]
-    }
-  ]
+
+  "browser_specific_settings": {
+        "gecko": {
+        "id": "addon@addon-example.com"
+        }
+  }
 }
