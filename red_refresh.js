@@ -72,7 +72,7 @@ function activateRefreshTimer() {
   // get the selected row
   var selectedRow = refreshTable.getElementsByClassName("table-info");
   // gets the value of the data in the id column from the slected row
-  var rowIdValue = selectedRow[0].children[4].textContent;
+  var rowIdValue = selectedRow[0].children[0].textContent;
   var classStr = "selectedRow_" + rowIdValue;
 
   $(selectedRow).addClass(classStr);
