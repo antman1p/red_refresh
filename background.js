@@ -46,9 +46,9 @@ function refreshTab(rowId, freq){
   }
 }
 
-function handleMessage(request, sender, sendResponse) {
-    console.log(request.greeting);
-    sendResponse({response: "Response from background script"});
-}
+// function handleMessage(request, sender, sendResponse) {
+    // console.log(request.greeting);
+    // sendResponse({response: "Response from background script"});
+// }
 
-browser.runtime.onMessage.addListener(handleMessage);
+// browser.runtime.onMessage.addListener(handleMessage);

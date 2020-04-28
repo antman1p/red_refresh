@@ -22,12 +22,14 @@ function listTabs() {
     }
     
     tableSelect();
+    
+    // after popup is reopened if there is a table element with a starttime, add the elapsed time
     for(let tableElem of backgroundPage.tableArray) {
-        if (tableElem.starttime != '-') {
+        if (tableElem.actstatus == 'Active') {
             var objIndex = backgroundPage.tableArray.findIndex((obj => obj.id == tableElem.id ));
             var selectedRow = tableBod.children[objIndex];
             var rowIdStr = "selectedRow_" + tableElem.id;
-            console.log(selectedRow);
+            // must re-add the class since it will not have it after the popup is closed and reopened.
             $(selectedRow).addClass(rowIdStr);
             showTimer(backgroundPage.tableArray[objIndex].startobj, backgroundPage.tableArray[objIndex].id);
         }
@@ -225,10 +227,10 @@ function showTimer(startTime, rowId) {
   });
 
 
-function handleResponse(message) {
-  console.log(`Message from the background script:  ${message.response}`);
-}
+// function handleResponse(message) {
+  // console.log(`Message from the background script:  ${message.response}`);
+// }
 
-function handleError(error) {
-  console.log(`Error: ${error}`);
-}
+// function handleError(error) {
+  // console.log(`Error: ${error}`);
+// }
