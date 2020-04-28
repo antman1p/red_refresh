@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", listTabs);
 
 var backgroundPage = browser.extension.getBackgroundPage();
 
-
 // Dynamically populate the table body with the open window tabs
 function listTabs() {
     var tableBod = document.getElementById("activeTimersTable").getElementsByTagName('tbody')[0];
@@ -21,7 +20,19 @@ function listTabs() {
       cell3.innerHTML = tab.starttime;
       cell4.innerHTML = tab.elapsedtime;
     }
+    
     tableSelect();
+    for(let tableElem of backgroundPage.tableArray) {
+        if (tableElem.starttime != '-') {
+            var objIndex = backgroundPage.tableArray.findIndex((obj => obj.id == tableElem.id ));
+            var selectedRow = tableBod.children[objIndex];
+            var rowIdStr = "selectedRow_" + tableElem.id;
+            console.log(selectedRow);
+            $(selectedRow).addClass(rowIdStr);
+            showTimer(backgroundPage.tableArray[objIndex].startobj, backgroundPage.tableArray[objIndex].id);
+        }
+    }
+
 }
 
 // start the click fucntion for selecting table rows.
@@ -89,7 +100,7 @@ function activateRefreshTimer() {
 
 function setCellStartTime(rowData) {
   var start = new Date();
-  
+  var startTimer = Date.now()
   
   enableDeactivateButton();
 
@@ -132,11 +143,11 @@ function setCellStartTime(rowData) {
   backgroundPage.refreshTab(rowIdValue, freq);
   
   // send start to background array for persistence
-  backgroundPage.tableArray[objIndex].startobj = start;
-  console.log(backgroundPage.tableArray[objIndex].startobj);
+  backgroundPage.tableArray[objIndex].startobj = startTimer;
+  
 
   //call Timer starts
-  showTimer(backgroundPage.tableArray[objIndex].startobj, rowIdValue, freq);
+  showTimer(backgroundPage.tableArray[objIndex].startobj, rowIdValue);
 }
 
 function showTimer(startTime, rowId) {
@@ -152,7 +163,8 @@ function showTimer(startTime, rowId) {
     }
   }
   var sTime = startTime;
-  var currTime = new Date();
+  var currTime = Date.now();
+  
 
   var timeDiff = currTime - sTime;
   timeDiff /= 1000;
@@ -181,13 +193,27 @@ function showTimer(startTime, rowId) {
     // get the selected row
     var selectedRow = refreshTable.getElementsByClassName("table-info");
     // gets the value of the data in the id column from the slected row
-    var rowIdValue = selectedRow[0].children[4].textContent;
+    var rowIdValue = selectedRow[0].children[0].textContent;
     var classStr = "selectedRow_" + rowIdValue;
 
     backgroundPage.deactivationList.push(classStr);
-
-    $(selectedRow).addClass("table-danger");
+    
+    var objIndex = backgroundPage.tableArray.findIndex((obj => obj.id == rowIdValue ));
     $(selectedRow).removeClass("table-info");
+    $(selectedRow).removeClass("table-success");
+    
+      // change status to Inactive
+    backgroundPage.tableArray[objIndex].actstatus = "Inactive";
+    
+    
+    // change row class (Color red)
+    backgroundPage.tableArray[objIndex].rowclass = "table-danger";
+    $(selectedRow).addClass(backgroundPage.tableArray[objIndex].rowclass);
+    
+    // selectedRow[0] is undefined????
+    // Won't change instantly, but IS changed when the popup is reopened
+    selectedRow[0].cells[1].innerHTML = backgroundPage.tableArray[objIndex].actstatus;
+    
   }
 
 
