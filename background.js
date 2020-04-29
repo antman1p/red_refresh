@@ -19,6 +19,25 @@ if (tableArray.length == 0) {
      });
 }
 
+// Function for adding tabs to the array that have been op0ened since the popup is closed
+// NOT FUCKING WORKING
+function newTabs() {
+    if (tableArray.length != 0) {
+        console.log(tableArray);
+        getCurrentWindowTabs().then((tabs) => {
+            for(let tab of tabs) {
+                if (!tableArray.findIndex(obj => obj.id == tab.id )) {
+                    var tabUrlStr = tab.url;
+                    if(tabUrlStr.length > 25) tabUrlStr = tabUrlStr.substring(0,25);
+                    var rowString = '{"id":"' + tab.id + '", "actstatus":"Inactive", "tab":"' + tabUrlStr + '", "starttime":"-", "elapsedtime":"-", "rowclass":"table-default", "startobj": ""}';
+                    var rowJSON = JSON.parse(rowString);
+                    tableArray.push(rowJSON);
+                }
+            }
+        });
+    }
+}
+
 
 function refreshTab(rowId, freq){
   var frequency = freq * 1000;
