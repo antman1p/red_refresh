@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", listTabs);
 
 var backgroundPage = browser.extension.getBackgroundPage();
 
-// Call function to add new tabs
-backgroundPage.newTabs();
 
 // Dynamically populate the table body with the open window tabs
 function listTabs() {
