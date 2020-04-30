@@ -201,26 +201,22 @@ function showTimer(startTime, rowId) {
 
     backgroundPage.deactivationList.push(classStr);
     
+      // change row class (Color red)
     var objIndex = backgroundPage.tableArray.findIndex((obj => obj.id == rowIdValue ));
-    $(selectedRow).removeClass("table-info");
-    $(selectedRow).removeClass("table-success");
-    
-      // change status to Inactive
-    backgroundPage.tableArray[objIndex].actstatus = "Inactive";
-    
-    
-    // change row class (Color red)
     backgroundPage.tableArray[objIndex].rowclass = "table-danger";
     $(selectedRow).addClass(backgroundPage.tableArray[objIndex].rowclass);
     
-    // selectedRow[0] is undefined????
-    // Won't change instantly, but IS changed when the popup is reopened
+    
+    $(selectedRow).removeClass("table-success");
+    
+    // change status to Inactive
+    backgroundPage.tableArray[objIndex].actstatus = "Inactive";
     selectedRow[0].cells[1].innerHTML = backgroundPage.tableArray[objIndex].actstatus;
     
   }
 
 
-// Click function for the "activate" button
+// Click function for the "deactivate" button
   $('#deactBtn').click(function(){
     disableActivateButton();
     disableIntervalTB();
