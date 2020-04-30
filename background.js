@@ -42,7 +42,7 @@ function urlUpdated(tabId, changeInfo, tab) {
     }
 }
 
-
+/* eslint-disable */
 function refreshTab(rowId, freq){
   var frequency = freq * 1000;
 
@@ -68,12 +68,6 @@ function refreshTab(rowId, freq){
     return;
   }
 }
-
-// function handleMessage(request, sender, sendResponse) {
-    // console.log(request.greeting);
-    // sendResponse({response: "Response from background script"});
-// }
-
-// browser.runtime.onMessage.addListener(handleMessage);
+/* eslint-enable */
 
 browser.tabs.onCreated.addListener(newTabs);
