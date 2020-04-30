@@ -5,8 +5,7 @@
 
   "description": "Auto-refresh your browser tabs for redteam operations",
   "background": {
-    "page": "red_refresh.html",
-    "persistence": true
+    "scripts": ["background.js"]
    },
   "icons": {
     "48": "icons/red_refresh.png",
@@ -16,7 +15,6 @@
     "<all_urls>",
     "activeTab",
     "storage",
-    "cookies",
     "tabs"
   ],
   "browser_action": {
