@@ -14,5 +14,6 @@ Let's say you have access to a victim's email account and you are wrapping up op
   * ~Set it as Active on the table~
 * ~When "deactivate" button is clicked, stop the refresh timer coresponding to the selected table item~
 * ~Test~
+* ~Maintain state persistence when extension pop-up is closed~
+* Fix Problem with table row state change delay
 * Utilize disableActivateButton() function
-* Maintain state persistence when extension pop-up is closed
