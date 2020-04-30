@@ -28,7 +28,7 @@ const filter = {
 }
 
 // Function for adding tabs to the array that have been opened since the popup is closed
-function newTabs(tab) {
+function newTabs() {
     browser.tabs.onUpdated.addListener(urlUpdated, filter);
 }
 
