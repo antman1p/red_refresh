@@ -65,10 +65,10 @@ function enableDeactivateButton() {
   deActBtn.className = "btn btn-danger";
 }
 
-function disableDeactivateButton() {
-  var deActBtn = document.getElementById("deactBtn");
-  deActBtn.className = "btn btn-danger disabled";
-}
+// function disableDeactivateButton() {
+  // var deActBtn = document.getElementById("deactBtn");
+  // deActBtn.className = "btn btn-danger disabled";
+// }
 
 // Enable the refresh interval textbox
 function enableIntervalTB() {
@@ -131,8 +131,6 @@ function setCellStartTime(rowData) {
   backgroundPage.tableArray[objIndex].rowclass = "table-success";
   $(rowData).addClass(backgroundPage.tableArray[objIndex].rowclass);
 
- 
-
   // get the input for refresh frequency
   var freq = document.getElementById("inputInterval").value;
 
@@ -148,7 +146,6 @@ function setCellStartTime(rowData) {
   // send start to background array for persistence
   backgroundPage.tableArray[objIndex].startobj = startTimer;
   
-
   //call Timer starts
   showTimer(backgroundPage.tableArray[objIndex].startobj, rowIdValue);
 }
@@ -168,7 +165,6 @@ function showTimer(startTime, rowId) {
   var sTime = startTime;
   var currTime = Date.now();
   
-
   var timeDiff = currTime - sTime;
   timeDiff /= 1000;
   var seconds = Math.round(timeDiff);
@@ -215,19 +211,9 @@ function showTimer(startTime, rowId) {
     
   }
 
-
 // Click function for the "deactivate" button
   $('#deactBtn').click(function(){
     disableActivateButton();
     disableIntervalTB();
     deactivateRefreshTimer();
   });
-
-
-// function handleResponse(message) {
-  // console.log(`Message from the background script:  ${message.response}`);
-// }
-
-// function handleError(error) {
-  // console.log(`Error: ${error}`);
-// }

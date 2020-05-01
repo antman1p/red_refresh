@@ -4,6 +4,14 @@ A firefox plugin that refreshes tabs and keeps track of how long they were open 
 Let's say you have access to a victim's email account and you are wrapping up operations for the week. You won't be able to touch the browser over the weekend. If the email account timesout after an unknown time of no activity, you may come back to your browser after the weekend to begin the week's operations and find that you no longer have access to the account.  Red refresh ensures that this won't happen and it also gives you usable dwell time metrics for your reporting
 
 
+# Installation
+To install an extension temporarily:
+* open Firefox
+* enter “about:debugging” in the URL bar
+* click “This Firefox”
+* click “Load Temporary Add-on”
+* open the extension’s directory and select any file inside the extension (red_refresh.js).
+
 ## TODO
 * ~On load, query all of the open browser tabs, return their page titles~
   * ~add them to the table~
@@ -15,5 +23,6 @@ Let's say you have access to a victim's email account and you are wrapping up op
 * ~When "deactivate" button is clicked, stop the refresh timer coresponding to the selected table item~
 * ~Test~
 * ~Maintain state persistence when extension pop-up is closed~
-* Fix Problem with table row state change delay
+* ~Fix Problem with table row state change delay~
 * Utilize disableActivateButton() function
+* Debug!
